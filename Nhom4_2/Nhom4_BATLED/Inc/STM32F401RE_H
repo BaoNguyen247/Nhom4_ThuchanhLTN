@@ -1,0 +1,66 @@
+#ifndef STM32F401RE_H
+#define STM32F401RE_H
+
+#include <stdint.h>
+
+// Địa chỉ cơ sở cho các ngoại vi
+#define GPIOA_BASE 0x40020000
+#define GPIOC_BASE 0x40020800
+#define RCC_BASE   0x40023800
+
+// Cấu trúc cho GPIO
+typedef struct {
+    volatile uint32_t MODER;   // Thanh ghi chế độ cổng GPIO
+    volatile uint32_t OTYPER;  // Thanh ghi loại đầu ra cổng GPIO
+    volatile uint32_t OSPEEDR; // Thanh ghi tốc độ đầu ra cổng GPIO
+    volatile uint32_t PUPDR;   // Thanh ghi pull-up/pull-down cổng GPIO
+    volatile uint32_t IDR;     // Thanh ghi dữ liệu đầu vào cổng GPIO
+    volatile uint32_t ODR;     // Thanh ghi dữ liệu đầu ra cổng GPIO
+    volatile uint32_t BSRR;    // Thanh ghi đặt/reset bit cổng GPIO
+    volatile uint32_t LCKR;    // Thanh ghi khóa cấu hình cổng GPIO
+    volatile uint32_t AFRL;    // Thanh ghi chức năng thay thế thấp
+    volatile uint32_t AFRH;    // Thanh ghi chức năng thay thế cao
+} GPIO_TypeDef;
+
+// Định nghĩa GPIOA và GPIOC
+#define GPIOA ((GPIO_TypeDef *) GPIOA_BASE)
+#define GPIOC ((GPIO_TypeDef *) GPIOC_BASE)
+
+// Cấu trúc cho RCC
+typedef struct {
+    volatile uint32_t CR;          // Thanh ghi điều khiển đồng hồ
+    volatile uint32_t PLLCFGR;     // Thanh ghi cấu hình PLL
+    volatile uint32_t CFGR;        // Thanh ghi cấu hình đồng hồ
+    volatile uint32_t CIR;         // Thanh ghi ngắt đồng hồ
+    volatile uint32_t AHB1RSTR;    // Thanh ghi reset ngoại vi AHB1
+    volatile uint32_t AHB2RSTR;    // Thanh ghi reset ngoại vi AHB2
+    volatile uint32_t AHB3RSTR;    // Thanh ghi reset ngoại vi AHB3
+    uint32_t RESERVED0;            // Đặt chỗ
+    volatile uint32_t APB1RSTR;    // Thanh ghi reset ngoại vi APB1
+    volatile uint32_t APB2RSTR;    // Thanh ghi reset ngoại vi APB2
+    uint32_t RESERVED1[2];         // Đặt chỗ
+    volatile uint32_t AHB1ENR;     // Thanh ghi bật đồng hồ ngoại vi AHB1
+    volatile uint32_t AHB2ENR;     // Thanh ghi bật đồng hồ ngoại vi AHB2
+    volatile uint32_t AHB3ENR;     // Thanh ghi bật đồng hồ ngoại vi AHB3
+    uint32_t RESERVED2;            // Đặt chỗ
+    volatile uint32_t APB1ENR;     // Thanh ghi bật đồng hồ ngoại vi APB1
+    volatile uint32_t APB2ENR;     // Thanh ghi bật đồng hồ ngoại vi APB2
+    uint32_t RESERVED3[2];         // Đặt chỗ
+    volatile uint32_t AHB1LPENR;   // Thanh ghi bật đồng hồ ngoại vi AHB1 ở chế độ tiết kiệm năng lượng
+    volatile uint32_t AHB2LPENR;   // Thanh ghi bật đồng hồ ngoại vi AHB2 ở chế độ tiết kiệm năng lượng
+    volatile uint32_t AHB3LPENR;   // Thanh ghi bật đồng hồ ngoại vi AHB3 ở chế độ tiết kiệm năng lượng
+    uint32_t RESERVED4;            // Đặt chỗ
+    volatile uint32_t APB1LPENR;   // Thanh ghi bật đồng hồ ngoại vi APB1 ở chế độ tiết kiệm năng lượng
+    volatile uint32_t APB2LPENR;   // Thanh ghi bật đồng hồ ngoại vi APB2 ở chế độ tiết kiệm năng lượng
+    uint32_t RESERVED5[2];         // Đặt chỗ
+    volatile uint32_t BDCR;        // Thanh ghi điều khiển miền sao lưu
+    volatile uint32_t CSR;         // Thanh ghi trạng thái và điều khiển đồng hồ
+    uint32_t RESERVED6[2];         // Đặt chỗ
+    volatile uint32_t SSCGR;       // Thanh ghi tạo đồng hồ phổ rộng
+    volatile uint32_t PLLI2SCFGR;  // Thanh ghi cấu hình PLLI2S
+} RCC_TypeDef;
+
+// Định nghĩa RCC
+#define RCC ((RCC_TypeDef *) RCC_BASE)
+
+#endif // STM32F401RE_H
